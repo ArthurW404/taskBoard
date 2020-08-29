@@ -35,6 +35,12 @@ class Board:
         Adds an item to column col of the board
         """
         self.board[col].append(item)
+    
+    def remove_item(self, col, item):
+        """
+        Removes an item to column col of the board
+        """
+        self.board[col].remove(item)
 
     def get_items(self):
         """
@@ -42,13 +48,16 @@ class Board:
         """
         return [i for col in self.board for i in col]
 
-
-if __name__ == "__main__":
+def get_test_board():
     board = Board()
     board.add_new_column()
     board.add_item(0, "Greetings")
     board.add_item(0, "Hello")
     board.add_new_column()
     board.add_item(1, "11")
+    return board
+
+if __name__ == "__main__":
+    board = get_test_board()
     print (board.get_items())
     print (board)
