@@ -3,14 +3,15 @@ from src.board import Board, get_test_board
 
 app = Flask(__name__)
 
-
 # temp global variable, should replace with database or something 
 BOARD = get_test_board()
-# @app.route("/add_item")
-# def add_item():
-#     BOARD.add_new_colum()
 
-@app.route("/add_column", methods=["GET"])
+@app.route("/add_item", methods=["POST"])
+def add_item():
+    print("WOw")
+    return {}
+
+@app.route("/add_column", methods=["POST"])
 def add_column():
     BOARD.add_new_column()
 
@@ -19,7 +20,8 @@ def add_column():
     print("Fk")
     
     # Probs not a good way of doing this
-    return home()
+    # return home()
+    return {}
 
 @app.route("/", methods=["GET"])
 def home():

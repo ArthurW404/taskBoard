@@ -4,10 +4,24 @@
   {% for item in col %}
     <h1>{{item}}<h1>
   {% endfor %}
+
   <br>
 {% endfor %}
 
-<button type="button"  href="add_column" class="btn btn-primary">Primary</button>
+<button type="button"  class="btn btn-primary" onclick="add_issue11()">
+  Add new issue
+</button>
+
+<button type="button"  class="btn btn-primary"   onclick="add_col()">
+  Add new column
+</button>
+
+
+<button type="button"  class="btn btn-primary"   onclick="add_col()">
+  Add new column
+</button>
+
 
 <h1>hello</h1>
+<script src="./static/controller.js"></script>
 {% include  'tail.html' %}
