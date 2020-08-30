@@ -1,27 +1,24 @@
 {% include  'head.html' %}
 
-{% for col in columns %}
-  {% for item in col %}
-    <h1>{{item}}<h1>
+<script src="/static/controller.js"></script>
+
+<div class="container">
+
+  {% for col in columns %}
+    {% for item in col %}
+      <h1>{{item}}<h1>
+    {% endfor %}
+    <button type="button"  class="btn btn-primary" onclick="add_issue()">
+      Add new issue
+    </button>
+    <br>
   {% endfor %}
 
-  <br>
-{% endfor %}
 
-<button type="button"  class="btn btn-primary" onclick="add_issue11()">
-  Add new issue
-</button>
+  <button type="button" id="test" class="btn btn-primary"   onclick="add_col()">
+    Add new column
+  </button>
 
-<button type="button"  class="btn btn-primary"   onclick="add_col()">
-  Add new column
-</button>
+</div>
 
-
-<button type="button"  class="btn btn-primary"   onclick="add_col()">
-  Add new column
-</button>
-
-
-<h1>hello</h1>
-<script src="./static/controller.js"></script>
 {% include  'tail.html' %}

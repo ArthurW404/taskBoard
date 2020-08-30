@@ -1,6 +1,4 @@
-
 function add_col() {
-    console.log(":F");
     fetch("/add_column", {
         method: "POST"
     })
@@ -8,8 +6,7 @@ function add_col() {
         .catch((error) => console.log("Something went wrong: " + error));
 }
 
-function add_issue11() {
-    console.log(":FUCK");
+function add_issue() {
     fetch("/add_item", {
         method: "POST"
     })
