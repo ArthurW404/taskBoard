@@ -10,7 +10,7 @@
     <div>
 
       <!-- loading each item in the column  -->
-
+      <h1>{{col.name}} </h1>
       {% for item in col.get_items() %}
         {{item}}
         <br>
@@ -49,15 +49,13 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form>
         <div class="modal-body">
-            <input type="text" name="name" id="name" value="new_col_name" required>
+          <input type="text" name="name" id="new_col_name" required>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <input class="btn btn-primary" type="submit" value="Save changes!">
+          <button class="btn btn-primary" onclick="add_col()">Save changes!</button>
         </div>
-      </form>
     </div>
   </div>
 </div>

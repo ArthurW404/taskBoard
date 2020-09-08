@@ -9,5 +9,9 @@ class Column:
         """
         return self.__items
 
+    @property
+    def name(self):
+        return self.__name
+
     def append(self, item):
         self.__items.append(item)

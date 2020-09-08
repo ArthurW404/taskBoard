@@ -5,7 +5,7 @@ import signal
 app = Flask(__name__)
 
 # temp global variable, should replace with database or something 
-BOARD = get_test_board()
+BOARD = Board.new_board()
 
 
 @app.route("/add_item", methods=["POST"])
@@ -15,7 +15,9 @@ def add_item():
 
 @app.route("/add_column", methods=["POST"])
 def add_column():
-    BOARD.add_new_column(request.json['name'])
+    col_name = request.json['name']
+    print(col_name)
+    BOARD.add_new_column(col_name)
 
     # DEBUGGING
     BOARD.add_item(-1, "HEllo")

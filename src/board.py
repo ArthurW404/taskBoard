@@ -10,6 +10,10 @@ class Board:
         # list which contains all board columns 
         self.__board = []
 
+    @staticmethod
+    def new_board():
+        return Board()
+
     @property
     def board(self):
         """

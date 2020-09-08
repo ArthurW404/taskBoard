@@ -1,5 +1,11 @@
 function add_col() {
-    var col_name = "Test";
+
+    // get string that is in the text form for setting col name
+    var new_name = document.querySelector("#new_col_name");
+    var col_name = new_name.value;
+    
+    
+
     fetch("/add_column", {
         method: "POST",
         headers: {
@@ -9,8 +15,12 @@ function add_col() {
             name: col_name
         })
     })
-        .then(() => window.location.reload()) // reloads page
+        .then(() => {
+            new_name.value = ""; 
+            window.location.reload()
+        }) // reloads page
         .catch((error) => console.log("Something went wrong: " + error));
+        
 }
 
 function add_issue() {
