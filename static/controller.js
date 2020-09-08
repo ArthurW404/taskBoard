@@ -1,6 +1,13 @@
 function add_col() {
+    var col_name = "Test";
     fetch("/add_column", {
-        method: "POST"
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+            name: col_name
+        })
     })
         .then(() => window.location.reload()) // reloads page
         .catch((error) => console.log("Something went wrong: " + error));

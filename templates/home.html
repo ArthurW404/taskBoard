@@ -1,24 +1,67 @@
 {% include  'head.html' %}
 
-<script src="/static/controller.js"></script>
+<link rel="stylesheet" href="/static/home.css">
 
-<div class="container">
+<h1> Greeting </h1>
 
+<div class="scrollmenu">
+<!-- generating each column -->
   {% for col in columns %}
-    {% for item in col %}
-      <h1>{{item}}<h1>
-    {% endfor %}
-    <button type="button"  class="btn btn-primary" onclick="add_issue()">
-      Add new issue
-    </button>
-    <br>
+    <div>
+
+      <!-- loading each item in the column  -->
+
+      {% for item in col.get_items() %}
+        {{item}}
+        <br>
+      {% endfor %}
+
+      <!-- loading button to add new item to this column at the end of column  -->
+      
+
+      <button type="button"  class="btn btn-primary" onclick="add_issue()">
+        Add new issue 
+      </button>
+
+    </div>
+    
   {% endfor %}
 
-
   <button type="button" id="test" class="btn btn-primary"   onclick="add_col()">
+    Add new column (old)
+  </button>
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_col_modal">
     Add new column
   </button>
 
 </div>
+
+
+<!-- add_col_modal -->
+<div class="modal fade" id="add_col_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add new column</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body">
+            <input type="text" name="name" id="name" value="new_col_name" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input class="btn btn-primary" type="submit" value="Save changes!">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/static/controller.js"></script>
 
 {% include  'tail.html' %}

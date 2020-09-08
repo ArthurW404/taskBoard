@@ -1,0 +1,13 @@
+div.scrollmenu {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.scrollmenu div {
+    display: inline-block;
+    color: wheat;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}

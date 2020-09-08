@@ -1,6 +1,8 @@
+from .column import Column
+
 class Board:
     """
-    2D matrix to represent a task board
+    Object which contains 0 to M columns
     """
     def __init__(self):
         super().__init__()
@@ -18,11 +20,11 @@ class Board:
     def __str__(self):
         return str(board.board)
 
-    def add_new_column(self):
+    def add_new_column(self, col_name):
         """
         Adds new column to end of board structure
         """
-        self.board.append([])
+        self.board.append(Column(col_name))
     
     def remove_column(self, index):
         """
@@ -46,14 +48,14 @@ class Board:
         """
         Returns a list of all items in the board
         """
-        return [i for col in self.board for i in col]
+        return [i for col in self.board for i in col.get_items()]
 
 def get_test_board():
     board = Board()
-    board.add_new_column()
+    board.add_new_column("Test")
     board.add_item(0, "Greetings")
     board.add_item(0, "Hello")
-    board.add_new_column()
+    board.add_new_column("Test2")
     board.add_item(1, "11")
     return board
 

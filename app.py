@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from src.board import Board, get_test_board
 import signal
 
@@ -15,7 +15,7 @@ def add_item():
 
 @app.route("/add_column", methods=["POST"])
 def add_column():
-    BOARD.add_new_column()
+    BOARD.add_new_column(request.json['name'])
 
     # DEBUGGING
     BOARD.add_item(-1, "HEllo")
