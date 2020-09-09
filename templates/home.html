@@ -12,14 +12,15 @@
       <!-- loading each item in the column  -->
       <h1>{{col.name}} </h1>
       {% for item in col.get_items() %}
-        {{item}}
+        {{item.name}}
+        {{item.description}}
         <br>
       {% endfor %}
 
       <!-- loading button to add new item to this column at the end of column  -->
       
 
-      <button type="button"  class="btn btn-primary" onclick="add_issue()">
+      <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#add_issue_modal" onclick="handle_issue_button({{col.id}})">
         Add new issue 
       </button>
 
@@ -27,15 +28,35 @@
     
   {% endfor %}
 
-  <button type="button" id="test" class="btn btn-primary"   onclick="add_col()">
-    Add new column (old)
-  </button>
-
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_col_modal">
     Add new column
   </button>
 
+</div>
+
+<!-- add_issue_modal -->
+<div class="modal fade" id="add_issue_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add new issue</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body">
+        
+          name: <input type="text" name="name" id="new_issue_name" required>
+          <br>
+          description: <input type="text" name="description" id="issue_descript" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary" onclick="add_issue()">Add Issue</button>
+        </div>
+    </div>
+  </div>
 </div>
 
 
@@ -54,7 +75,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button class="btn btn-primary" onclick="add_col()">Save changes!</button>
+          <button class="btn btn-primary" onclick="add_col()">Add New Column</button>
         </div>
     </div>
   </div>

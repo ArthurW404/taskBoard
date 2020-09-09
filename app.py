@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from src.board import Board, get_test_board
+from src.item import Item
 import signal
 
 app = Flask(__name__)
@@ -11,6 +12,11 @@ BOARD = Board.new_board()
 @app.route("/add_item", methods=["POST"])
 def add_item():
     print("WOw")
+    # print(request.json)
+    issue_name = request.json['name']
+    issue_descript = request.json['description']
+    col_id = request.json['col_id']
+    BOARD.add_item(col_id, Item(issue_name, issue_descript))
     return {}
 
 @app.route("/add_column", methods=["POST"])

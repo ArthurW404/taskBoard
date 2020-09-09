@@ -10,6 +10,9 @@ class Board:
         # list which contains all board columns 
         self.__board = []
 
+        # used to create unique id's for all columns on this board
+        self.__curr_id = 0
+
     @staticmethod
     def new_board():
         return Board()
@@ -28,7 +31,8 @@ class Board:
         """
         Adds new column to end of board structure
         """
-        self.board.append(Column(col_name))
+        self.board.append(Column(col_name, self.__curr_id))
+        self.__curr_id += 1
     
     def remove_column(self, index):
         """
@@ -36,11 +40,16 @@ class Board:
         """
         self.board.pop(index)
     
-    def add_item(self, col, item):
+    def add_item(self, col_id, item):
         """
         Adds an item to column col of the board
         """
-        self.board[col].append(item)
+        # get col with same id as col_id
+        for col in self.__board:
+            if col.id == col_id:
+                col.append(item)
+                return
+        print(col_id, "Does not exist")
     
     def remove_item(self, col, item):
         """
