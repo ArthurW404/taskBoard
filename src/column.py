@@ -22,13 +22,14 @@ class Column:
     def remove_item(self, item_id):
         """
             Method removes item with id item_id
-            returns true on success and false on failure
+
+            returns item removed or None if item does not exist
         """
         for item in self.__items:
             if item.id == item_id:
                 self.__items.remove(item)
-                return True
-        return False
+                return item
+        return None
 
     @property
     def name(self):

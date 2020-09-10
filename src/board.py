@@ -40,9 +40,9 @@ class Board:
         """
         Removes entire column
         """
-        for col in self.__board:
+        for col in self.board:
             if col.id == col_id:
-                self.__board.remove(col)
+                self.board.remove(col)
                 return
         print(col_id, "Does not exist")
         
@@ -53,7 +53,7 @@ class Board:
         Adds an item to column col of the board
         """
         # get col with same id as col_id
-        for col in self.__board:
+        for col in self.board:
             if col.id == col_id:
                 col.append(Item(issue_name,issue_descript, self.__curr_issue_id))
                 self.__curr_issue_id += 1
@@ -75,3 +75,33 @@ class Board:
         Returns a list of all items in the board
         """
         return [i for col in self.board for i in col.get_items()]
+
+    def move_column(self, col_id, is_left):
+        i=0
+        while i < len(self.board):
+            if self.board[i].id == col_id:
+                if is_left and i != 0:
+                    col = self.board.pop(i)
+                    self.board.insert(i - 1, col)
+                    return
+                elif not is_left and i != len(self.board) - 1:
+                    col = self.board.pop(i)
+                    self.board.insert(i + 1, col)
+                    return
+            i += 1
+
+
+    def move_item(self, issue_id, direction):
+        i=0
+        while i < len(self.board):
+            col = self.board[i]
+            if col.has_item(issue_id):
+                if direction == "left" and i != 0:
+                    issue = col.remove_item(issue_id)
+                    self.board[i-1].append(issue)
+                    return
+                elif direction == "right" and i != len(self.board) - 1:
+                    issue = col.remove_item(issue_id)
+                    self.board[i+1].append(issue)
+                    return
+            i += 1

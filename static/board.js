@@ -83,6 +83,36 @@ function del_col(col_id) {
 
 }
 
-function move_issue() {
+function move_col (col_id, is_left) {
+    fetch("/move_column", {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+            id: col_id,
+            left: is_left
+        })
+    })
+        .then(() => window.location.reload()) // reloads page
+        .catch((error) => console.log("Something went wrong: " + error));
+
+}
+
+
+function move_issue(item_id, dir) {
+    console.log(dir);
+    fetch("/move_issue", {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+            id: item_id,
+            direction: dir
+        })
+    })
+        .then(() => window.location.reload()) // reloads page
+        .catch((error) => console.log("Something went wrong: " + error));
 
 }

@@ -2,103 +2,10 @@
 
 <link rel="stylesheet" href="/static/home.css">
 
-<h1> Greeting </h1>
+{% include 'navbar.html'%}
 
-<div class="scrollmenu">
-<!-- generating each column -->
-  {% for col in columns %}
-    <div>
-      <!-- loading each item in the column  -->
-      <h1>
-        {{col.name}}
-        <button style="float: right;" type="button"  class="btn btn-danger" onclick="del_col({{col.id}})">
-          del 
-        </button>  
-      </h1>
-      {% for item in col.get_items() %}
-        <div class="card text-center">
-          <div class="card-body">
-            <h5 class="card-title">
-              {{item.name}}
-              <button style="float: right;" type="button"  class="btn btn-danger" onclick="del_issue({{item.id}})">
-                del 
-              </button> 
-            </h5>
+<h1> My board </h1>
 
-            <p class="card-text">{{item.description}}</p>
-            <button type="button"  class="btn btn-primary">
-              Move left
-            </button>
-            <button type="button"  class="btn btn-primary">
-              Move right
-            </button>
-          </div>
-        </div>
-        <br>
-      {% endfor %}
-
-      <!-- loading button to add new item to this column at the end of column  -->
-      <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#add_issue_modal" onclick="handle_issue_button({{col.id}})">
-        Add new issue 
-      </button>
-
-    </div>
-    
-  {% endfor %}
-
-  <!-- Button trigger modal -->
-  <button id="add_col" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_col_modal">
-    Add new column
-  </button>
-
-</div>
-
-<!-- add_issue_modal -->
-<div class="modal fade" id="add_issue_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add new issue</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-        <div class="modal-body">
-        
-          name: <input type="text" name="name" id="new_issue_name" required>
-          <br>
-          description: <input type="text" name="description" id="issue_descript" required>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button class="btn btn-primary" onclick="add_issue()">Add Issue</button>
-        </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- add_col_modal -->
-<div class="modal fade" id="add_col_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add new column</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-        <div class="modal-body">
-          <input type="text" name="name" id="new_col_name" required>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button class="btn btn-primary" onclick="add_col()">Add New Column</button>
-        </div>
-    </div>
-  </div>
-</div>
-
-<script src="/static/controller.js"></script>
+{% include 'board.html'%}
 
 {% include  'tail.html' %}

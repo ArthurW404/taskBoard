@@ -11,7 +11,6 @@ BOARD = Board.new_board()
 @app.route("/add_item", methods=["POST"])
 def add_item():
     print("WOw")
-    # print(request.json)
     issue_name = request.json['name']
     issue_descript = request.json['description']
     col_id = request.json['col_id']
@@ -23,12 +22,6 @@ def add_column():
     col_name = request.json['name']
     print(col_name)
     BOARD.add_new_column(col_name)
-
-    # DEBUGGING
-    # BOARD.add_item(-1, "HEllo")
-    
-    # Probs not a good way of doing this
-    # return home()
     return {}
 
 @app.route("/delete_issue", methods=["DELETE"])
@@ -43,9 +36,18 @@ def delete_column():
     BOARD.remove_column(col_id)
     return {}
 
+@app.route("/move_column", methods=["PUT"])
+def move_column():
+    col_id = request.json["id"]
+    is_left = request.json["left"]
+    BOARD.move_column(col_id, is_left)
+    return {}
+
 @app.route("/move_issue", methods=["PUT"])
 def move_issue():
-
+    issue_id = request.json["id"]
+    direction = request.json["direction"]
+    BOARD.move_item(issue_id, direction)
     return {}
 
 @app.route("/", methods=["GET"])
