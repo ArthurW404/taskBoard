@@ -50,3 +50,39 @@ function add_issue(col_id) {
         .then(() => window.location.reload()) // reloads page
         .catch((error) => console.log("Something went wrong: " + error));
 }
+
+function del_issue(item_id) {
+    console.log(item_id);
+    fetch("/delete_issue", {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+            id: item_id
+        })
+    })
+        .then(() => window.location.reload()) // reloads page
+        .catch((error) => console.log("Something went wrong: " + error));
+
+}
+
+function del_col(col_id) {
+    console.log(col_id);
+    fetch("/delete_column", {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+            id: col_id
+        })
+    })
+        .then(() => window.location.reload()) // reloads page
+        .catch((error) => console.log("Something went wrong: " + error));
+
+}
+
+function move_issue() {
+
+}

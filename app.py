@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
-from src.board import Board, get_test_board
-from src.item import Item
+from src.board import Board
 import signal
 
 app = Flask(__name__)
@@ -16,7 +15,7 @@ def add_item():
     issue_name = request.json['name']
     issue_descript = request.json['description']
     col_id = request.json['col_id']
-    BOARD.add_item(col_id, Item(issue_name, issue_descript))
+    BOARD.add_item(col_id, issue_name, issue_descript)
     return {}
 
 @app.route("/add_column", methods=["POST"])
@@ -26,10 +25,27 @@ def add_column():
     BOARD.add_new_column(col_name)
 
     # DEBUGGING
-    BOARD.add_item(-1, "HEllo")
+    # BOARD.add_item(-1, "HEllo")
     
     # Probs not a good way of doing this
     # return home()
+    return {}
+
+@app.route("/delete_issue", methods=["DELETE"])
+def delete_issue():
+    item_id = request.json["id"]
+    BOARD.remove_item(item_id)
+    return {}
+
+@app.route("/delete_column", methods=["DELETE"])
+def delete_column():
+    col_id = request.json["id"]
+    BOARD.remove_column(col_id)
+    return {}
+
+@app.route("/move_issue", methods=["PUT"])
+def move_issue():
+
     return {}
 
 @app.route("/", methods=["GET"])

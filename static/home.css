@@ -6,8 +6,15 @@ div.scrollmenu {
 
 div.scrollmenu div {
     display: inline-block;
+    vertical-align:top;
     color: wheat;
     text-align: center;
     padding: 14px;
     text-decoration: none;
+}
+
+
+#add_col {
+    display: inline-block;
+    padding: 14px;
 }

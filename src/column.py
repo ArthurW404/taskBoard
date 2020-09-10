@@ -10,6 +10,26 @@ class Column:
         """
         return self.__items
 
+    def has_item(self, item_id):
+        """
+            Method checks whether it has a item with id item_id
+        """
+        for item in self.__items:
+            if item.id == item_id:
+                return True
+        return False
+
+    def remove_item(self, item_id):
+        """
+            Method removes item with id item_id
+            returns true on success and false on failure
+        """
+        for item in self.__items:
+            if item.id == item_id:
+                self.__items.remove(item)
+                return True
+        return False
+
     @property
     def name(self):
         return self.__name

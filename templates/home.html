@@ -8,18 +8,36 @@
 <!-- generating each column -->
   {% for col in columns %}
     <div>
-
       <!-- loading each item in the column  -->
-      <h1>{{col.name}} </h1>
+      <h1>
+        {{col.name}}
+        <button style="float: right;" type="button"  class="btn btn-danger" onclick="del_col({{col.id}})">
+          del 
+        </button>  
+      </h1>
       {% for item in col.get_items() %}
-        {{item.name}}
-        {{item.description}}
+        <div class="card text-center">
+          <div class="card-body">
+            <h5 class="card-title">
+              {{item.name}}
+              <button style="float: right;" type="button"  class="btn btn-danger" onclick="del_issue({{item.id}})">
+                del 
+              </button> 
+            </h5>
+
+            <p class="card-text">{{item.description}}</p>
+            <button type="button"  class="btn btn-primary">
+              Move left
+            </button>
+            <button type="button"  class="btn btn-primary">
+              Move right
+            </button>
+          </div>
+        </div>
         <br>
       {% endfor %}
 
       <!-- loading button to add new item to this column at the end of column  -->
-      
-
       <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#add_issue_modal" onclick="handle_issue_button({{col.id}})">
         Add new issue 
       </button>
@@ -29,7 +47,7 @@
   {% endfor %}
 
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_col_modal">
+  <button id="add_col" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_col_modal">
     Add new column
   </button>
 
