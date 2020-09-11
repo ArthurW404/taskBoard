@@ -1,15 +1,21 @@
-div.scrollmenu {
+.scrollmenu {
     overflow: auto;
     white-space: nowrap;
+    height: 100%; 
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
 }
 
 div.scrollmenu div {
     display: inline-block;
     vertical-align:top;
     color: wheat;
+    padding: 7px;
     text-align: center;
     text-decoration: none;
-
 }
 
 
