@@ -5,7 +5,7 @@ class Board:
     """
     Object which contains 0 to M columns
     """
-    def __init__(self):
+    def __init__(self, name):
         super().__init__()
         
         # list which contains all board columns 
@@ -14,10 +14,20 @@ class Board:
         # used to create unique id's for all columns on this board
         self.__curr_col_id = 0
         self.__curr_issue_id = 0
+        self.__bg = "/static/bg_images/default.png"
+        self.__name = name
 
     @staticmethod
-    def new_board():
-        return Board()
+    def new_board(name):
+        return Board(name)
+
+    @property
+    def bg(self):
+        return self.__bg
+
+    @property 
+    def name(self):
+        return self.__name
 
     @property
     def board(self):

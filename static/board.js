@@ -11,7 +11,7 @@ function add_col() {
     var name_inp = document.querySelector("#new_col_name");
     var col_name = name_inp.value;
     
-    fetch("/add_column", {
+    fetch("/board/add_column", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -36,7 +36,7 @@ function add_issue(col_id) {
     var description_inp = document.querySelector("#issue_descript");
     var issue_name = name_inp.value;
     var issue_descript = description_inp.value;
-    fetch("/add_item", {
+    fetch("/board/add_item", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -53,7 +53,7 @@ function add_issue(col_id) {
 
 function del_issue(item_id) {
     console.log(item_id);
-    fetch("/delete_issue", {
+    fetch("/board/delete_issue", {
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -69,7 +69,7 @@ function del_issue(item_id) {
 
 function del_col(col_id) {
     console.log(col_id);
-    fetch("/delete_column", {
+    fetch("/board/delete_column", {
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -84,7 +84,7 @@ function del_col(col_id) {
 }
 
 function move_col (col_id, is_left) {
-    fetch("/move_column", {
+    fetch("/board/move_column", {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -102,7 +102,7 @@ function move_col (col_id, is_left) {
 
 function move_issue(item_id, dir) {
     console.log(dir);
-    fetch("/move_issue", {
+    fetch("/board/move_issue", {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
