@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request, redirect
-from src.boards_handler import set_curr_board, get_boards, get_curr_board, add_new_board, load_boards, save_boards
+from src.boards_handler import close_boards, set_curr_board, get_boards, get_curr_board, add_new_board, load_boards, save_boards
 import signal
 import time
 import threading
 
 app = Flask(__name__)
 
-uid = 0
+# uid is unique to each user
+# should be retrieved after user successfully logs in 
+uid = 'test'
 
 #loads board from file
 load_boards(uid)
@@ -87,8 +89,8 @@ def home():
 def sig_handler(signum, frame):
     print('Signal handler called with signal', signum)
 
-    # save data before exiting
-    save_boards(uid)
+    # close data before exiting
+    close_boards()
     exit(0)
 
 def save(uid):
