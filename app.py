@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request
-from src.board import Board
-from src.boards_handler import set_curr_board, get_boards, get_curr_board, add_new_board, load_boards
+from flask import Flask, render_template, request, redirect
+from src.boards_handler import set_curr_board, get_boards, get_curr_board, add_new_board, load_boards, save_boards
 import signal
+import time
+import threading
 
 app = Flask(__name__)
 
@@ -63,14 +64,19 @@ def add_board():
     print(request.json)
     name = request.json['name']
     add_new_board(name)
+    return {}
 
 @app.route("/change_board", methods=["PUT"])
 def change_board():
     name = request.json['name']
     set_curr_board(name)
+    return {}
 
 @app.route("/board", methods=["GET"])
 def board():
+    user_board = get_curr_board()
+    if user_board is None:
+        return redirect("/")
     return render_template('board_page.html', boards=get_boards(), board=get_curr_board(), columns=get_curr_board().board)
 
 @app.route("/", methods=["GET"])
@@ -80,8 +86,19 @@ def home():
 
 def sig_handler(signum, frame):
     print('Signal handler called with signal', signum)
+
+    # save data before exiting
+    save_boards(uid)
     exit(0)
 
+def save(uid):
+    while True:
+        save_boards(uid)
+        time.sleep(3)
+        
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, sig_handler)
-    app.run(debug=True)
+    t = threading.Thread(target=save, args=(uid,))
+    t.daemon = True
+    t.start()
+    app.run(debug=False)

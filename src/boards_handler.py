@@ -2,7 +2,6 @@
 Functions for serializing user's board data 
 and manipulating boards
 """
-
 import pickle
 from .board import Board
 
@@ -32,8 +31,12 @@ def get_boards():
     return BOARDS
 
 def save_boards(uid):
+    """
+    Function for saving the board every time seconds
+    """
     global BOARDS
-    file_name = "./boards/" + uid + ".dump" 
+    print(BOARDS)
+    file_name = "./boards/" + str(uid) + ".dump" 
     with open(file_name, "wb") as file:
         pickle.dump(BOARDS, file)
     
@@ -61,4 +64,7 @@ def set_curr_board(name):
     return None
 
 def get_curr_board():
+    """
+    Returns None if there is no currently selected board
+    """
     return CURR_BOARD
