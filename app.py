@@ -76,13 +76,13 @@ def change_board():
 def board():
     user_board = get_curr_board()
     if user_board is None:
+
         return redirect("/")
     return render_template('board_page.html', boards=get_boards(), board=get_curr_board(), columns=get_curr_board().board)
 
 @app.route("/", methods=["GET"])
 def home():
     return render_template('home.html', boards=get_boards())
-
 
 def sig_handler(signum, frame):
     print('Signal handler called with signal', signum)

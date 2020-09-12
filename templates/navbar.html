@@ -31,8 +31,6 @@
 
     <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#login_modal">Login</button>
     <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#signup_modal">Sign up</button>
-
-
   </div>
 </nav>
 
@@ -70,11 +68,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="text" name="name" id="new_board_name" required>
+        Enter email: <input type="text" name="name" id="new_board_name" required>
+        <br>
+        Enter password: <input type="text" name="name" id="new_board_name" required>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" onclick="add_board()">Add New Column</button>
+        <button class="btn btn-primary" onclick="add_board()">Login</button>
       </div>
     </div>
   </div>
@@ -92,11 +92,15 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="text" name="name" id="new_board_name" required>
+        Enter email: <input type="text" name="name" id="new_board_name" required>
+        <br>
+        Create password: <input type="text" name="name" id="new_board_name" required>
+        <br>
+        Re-enter password: <input type="text" name="name" id="new_board_name" required>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" onclick="add_board()">Add New Column</button>
+        <button class="btn btn-primary" onclick="add_board()">Continue</button>
       </div>
     </div>
   </div>
