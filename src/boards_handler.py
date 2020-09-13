@@ -2,30 +2,29 @@
 Functions for serializing user's board data 
 and manipulating boards
 """
-import pickle
+import shelve
 from .board import Board
 
 CURR_BOARD = None
-BOARDS = []
+db_name = "boards.db"
+SHELVE =  None
+BOARDS = None
+
+def close_boards():
+    SHELVE.close()
 
 def load_boards(uid):
-    global BOARDS
+    global SHELVE, BOARDS
     """
     Function retrieves board from serialized file for user id uid
     If file does not exist, or is an empty list, there is no board  
     """
-    file_name = "./boards/" + str(uid) + ".dump" 
+    SHELVE = shelve.open(db_name)
     try:
-        file = open(file_name, "rb")
-        BOARDS = pickle.load(file)
-        file.close()
-        return BOARDS
-    except FileNotFoundError:
-        file = open(file_name, "wb")
-        BOARDS = []
-        pickle.dump(BOARDS, file)
-        file.close()
-        return BOARDS
+        BOARDS = SHELVE[uid]
+    except KeyError:
+        SHELVE[uid]  = []
+        BOARDS = SHELVE[uid]
 
 def get_boards():
     return BOARDS
@@ -34,12 +33,11 @@ def save_boards(uid):
     """
     Function for saving the board every time seconds
     """
-    global BOARDS
+    global BOARDS, SHELVE
     print(BOARDS)
-    file_name = "./boards/" + str(uid) + ".dump" 
-    with open(file_name, "wb") as file:
-        pickle.dump(BOARDS, file)
-    
+    SHELVE[uid] = BOARDS
+    SHELVE.sync()
+
 def add_new_board(name):
     """
     Function for adding new boards 
