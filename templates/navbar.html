@@ -23,85 +23,17 @@
           <button class="dropdown-item" href="/board" data-toggle="modal" data-target="#add_board_modal">+ Create a new board</a>
         </div>
       </li>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+   
     </ul>
-
+    
+    <!--
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
     <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#login_modal">Login</button>
     <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#signup_modal">Sign up</button>
+    -->
   </div>
 </nav>
 
-<!-- add_board_modal -->
-<div class="modal fade" id="add_board_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Make new board</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <input type="text" name="name" id="new_board_name" required>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" onclick="add_board()">Add New Column</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- login_modal -->
-<div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Login</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Enter email: <input type="text" name="name" id="new_board_name" required>
-        <br>
-        Enter password: <input type="text" name="name" id="new_board_name" required>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" onclick="add_board()">Login</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- signup_modal -->
-<div class="modal fade" id="signup_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Sign up</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Enter email: <input type="text" name="name" id="new_board_name" required>
-        <br>
-        Create password: <input type="text" name="name" id="new_board_name" required>
-        <br>
-        Re-enter password: <input type="text" name="name" id="new_board_name" required>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" onclick="add_board()">Continue</button>
-      </div>
-    </div>
-  </div>
-</div>

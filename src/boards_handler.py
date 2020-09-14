@@ -66,3 +66,15 @@ def get_curr_board():
     Returns None if there is no currently selected board
     """
     return CURR_BOARD
+
+def del_board(name):
+    name = str(name)
+    print("F")
+    global BOARDS
+    print("name=", name)
+    for board in BOARDS:
+        print(board.name)
+        if board.name == name:
+            print("HEre")
+            BOARDS.remove(board)
+            return

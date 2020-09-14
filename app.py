@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-from src.boards_handler import close_boards, set_curr_board, get_boards, get_curr_board, add_new_board, load_boards, save_boards
+from src.boards_handler import close_boards, set_curr_board, del_board, get_boards, get_curr_board, add_new_board, load_boards, save_boards
 import signal
 import time
 import threading
@@ -68,6 +68,13 @@ def add_board():
     add_new_board(name)
     return {}
 
+@app.route("/delete_board", methods=["DELETE"])
+def delete_board():
+    print(request.json)
+    name = request.json['name']
+    del_board(name)
+    return {}
+
 @app.route("/change_board", methods=["PUT"])
 def change_board():
     name = request.json['name']
@@ -86,21 +93,17 @@ def board():
 def home():
     return render_template('home.html', boards=get_boards())
 
-def sig_handler(signum, frame):
-    print('Signal handler called with signal', signum)
-
-    # close data before exiting
-    close_boards()
-    exit(0)
-
 def save(uid):
     while True:
         save_boards(uid)
         time.sleep(3)
-        
-if __name__ == "__main__":
-    signal.signal(signal.SIGINT, sig_handler)
+
+@app.before_first_request
+def init():
     t = threading.Thread(target=save, args=(uid,))
     t.daemon = True
     t.start()
+
+if __name__ == "__main__":
     app.run(debug=False)
+    close_boards()
