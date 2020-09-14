@@ -15,6 +15,7 @@ def close_boards():
 
 def load_boards(uid):
     global SHELVE, BOARDS
+    uid = str(uid)
     """
     Function retrieves board from serialized file for user id uid
     If file does not exist, or is an empty list, there is no board  
@@ -33,6 +34,7 @@ def save_boards(uid):
     """
     Function for saving the board every time seconds
     """
+    uid = str(uid)
     global BOARDS, SHELVE
     print(BOARDS)
     SHELVE[uid] = BOARDS

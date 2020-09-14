@@ -4,11 +4,13 @@
 <div class="scrollmenu" style="background-image: url('{{board.bg}}');">
   <h1>
     {{board.name}}
-    <button style="float: right;" type="button" class="btn btn-danger" >
+    <!--
+    <button style="float: right;" type="button" class="btn btn-danger" data-toggle="modal" data-target="#settings_modal">
       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-sliders" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/>
       </svg>
     </button>
+    -->
   </h1>
   <!-- generating each column -->
   {% for col in columns %}
@@ -131,4 +133,30 @@
   </div>
 </div>
 
+<!-- 
+  settings_modal
+<div class="modal fade" id="settings_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="Board_Settings">Board Settings</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="set_bg_image">Set the board's background image</label>
+          <input type="file" class="form-control-file" id="set_bg_image" accept="image/png, image/jpeg">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button class="btn btn-primary" onclick="save_settings()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
 <script src="/static/board.js"></script>

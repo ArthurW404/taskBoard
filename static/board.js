@@ -112,7 +112,7 @@ function move_issue(item_id, dir) {
             direction: dir
         })
     })
-        .then(() => window.location.reload()) // reloads page
-        .catch((error) => console.log("Something went wrong: " + error));
+    .then(() => window.location.reload()) // reloads page
+    .catch((error) => console.log("Something went wrong: " + error));
 
 }

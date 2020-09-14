@@ -1,24 +1,21 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, g
 from src.boards_handler import close_boards, set_curr_board, get_boards, get_curr_board, add_new_board, load_boards, save_boards
-import signal
+from src.login import add_user, debug_print, create_login_table, get_num_users, get_uid, user_exist
+import sqlite3
 import time
 import threading
 
 app = Flask(__name__)
 
-# uid is unique to each user
-# should be retrieved after user successfully logs in 
-uid = 'test'
+DATABASE = 'users.db'
 
-#loads board from file
-load_boards(uid)
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+    return db
 
-# # Each user have their own collection of boards
-# BOARDS = []
-# # temp global variable, should replace with database or something 
-# BOARD = Board.new_board("My crappy board")
-# BOARDS.append(BOARD)
-# BOARDS.append(Board.new_board("Test_board n2"))
+uids = []
 
 @app.route("/board/add_item", methods=["POST"])
 def add_item():
@@ -78,29 +75,85 @@ def change_board():
 def board():
     user_board = get_curr_board()
     if user_board is None:
-
         return redirect("/")
     return render_template('board_page.html', boards=get_boards(), board=get_curr_board(), columns=get_curr_board().board)
 
-@app.route("/", methods=["GET"])
+@app.route("/login", methods=["GET","POST"])
+def login():
+    if request.method == "GET":
+        return render_template('login_page.html')
+    elif request.method == "POST":
+        global uid
+        with get_db() as db:
+            c = db.cursor()
+            username = request.json['name']
+            password = request.json['password']
+            uid = get_uid(c, username, password)        
+            # add_user(c, uid, username, password)
+            debug_print(c)
+        #loads board from file
+        load_boards(uid)
+        t = threading.Thread(target=save_stuff, args=(uid,))
+        t.start() 
+    return {}
+
+@app.route("/signup", methods=["GET","POST"])
+def signup():
+    if request.method == "GET":
+        return render_template('signup_page.html')
+    elif request.method == "POST":
+        global uid
+        print(request.json)
+        with get_db() as db:
+            c = db.cursor()
+            username = request.json['name']
+            if (user_exist(c, username)):
+                return {}
+            password = request.json['password']
+            uid = get_num_users(c)
+            add_user(c, uid, username, password)
+            debug_print(c)
+        #loads board from file
+        load_boards(uid)
+        t = threading.Thread(target=save_stuff, args=(uid,))
+        t.start() 
+    return {}
+
+@app.route("/logout", methods=["GET"])
+def logout():
+    global uid
+    uid = None
+    return {}
+
+@app.route("/home", methods=["GET"])
 def home():
     return render_template('home.html', boards=get_boards())
 
-def sig_handler(signum, frame):
-    print('Signal handler called with signal', signum)
-
-    # close data before exiting
-    close_boards()
-    exit(0)
-
-def save(uid):
+@app.route("/", methods=["GET"])
+def root():
+    return redirect("/signup")
+    
+def save_stuff(uid):
     while True:
         save_boards(uid)
         time.sleep(3)
-        
+
+@app.before_first_request
+def activate_job():
+    global c
+    with get_db() as db:
+        c = db.cursor()
+        try:
+            create_login_table(c)
+        except sqlite3.OperationalError:
+            pass
+        debug_print(c)
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
+
 if __name__ == "__main__":
-    signal.signal(signal.SIGINT, sig_handler)
-    t = threading.Thread(target=save, args=(uid,))
-    t.daemon = True
-    t.start()
     app.run(debug=False)

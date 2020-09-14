@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">I'm board</a>
+  <a class="navbar-brand" href="/home">I'm board</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -8,7 +8,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
       </li>
 
       <li class="nav-item dropdown">
@@ -28,9 +28,12 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </ul>
+    <button class="btn btn-outline-success my-2 my-sm-0" onclick="logout()">Log out</button>
 
+    <!--
     <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#login_modal">Login</button>
     <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#signup_modal">Sign up</button>
+    -->
   </div>
 </nav>
 
@@ -56,7 +59,7 @@
   </div>
 </div>
 
-<!-- login_modal -->
+<!-- login_modal 
 <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -68,19 +71,20 @@
         </button>
       </div>
       <div class="modal-body">
-        Enter email: <input type="text" name="name" id="new_board_name" required>
+        Enter username: <input type="text" name="name" id="new_board_name" required>
         <br>
-        Enter password: <input type="text" name="name" id="new_board_name" required>
+        Enter password: <input type="password" name="name" id="new_board_name" required>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" onclick="add_board()">Login</button>
+        <button class="btn btn-primary" onclick="login()">Login</button>
       </div>
     </div>
   </div>
 </div>
+-->
 
-<!-- signup_modal -->
+<!-- signup_modal 
 <div class="modal fade" id="signup_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -92,16 +96,18 @@
         </button>
       </div>
       <div class="modal-body">
-        Enter email: <input type="text" name="name" id="new_board_name" required>
+        Enter username: <input type="text" name="name" id="signup_username" required>
         <br>
-        Create password: <input type="text" name="name" id="new_board_name" required>
+        Create password: <input type="password" name="name" id="new_password1" required>
         <br>
-        Re-enter password: <input type="text" name="name" id="new_board_name" required>
+        Re-enter password: <input type="password" name="name" id="new_password2" required>
       </div>
+      <div id="signup_message"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" onclick="add_board()">Continue</button>
+        <button class="btn btn-primary" onclick="signup()">Continue</button>
       </div>
     </div>
   </div>
 </div>
+-->
