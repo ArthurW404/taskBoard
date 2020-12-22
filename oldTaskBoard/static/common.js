@@ -15,7 +15,6 @@ function change_board(board_name) {
 }
 
 function add_board() {
-    // get string that is in the text form for setting col name
     var name_inp = document.querySelector("#new_board_name");
     var msg = document.querySelector("#add_board_msg");
     var board_name = name_inp.value;
